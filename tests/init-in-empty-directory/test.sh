@@ -60,7 +60,7 @@ function singleJqInitWithBadFolderName () {
 function testAllJqInitWithBadFolderName () {
 	while IFS= read -r -d '' dirpath;
 	do
-		dirname=$(basename -a "$dirpath")
+		dirname=$(basename "$dirpath")
 		echo "Subdirectory: '${dirname}'"
 
 		singleJqInitWithBadFolderName "$dirname"

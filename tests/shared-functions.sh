@@ -10,7 +10,7 @@ function resolvePath {
 	then
 		resolveDirectory "$1"
 	else
-		echo "$(resolveDirectory "$(dirname "$1")")/$(basename -a "$1")"
+		echo "$(resolveDirectory "$(dirname "$1")")/$(basename "$1")"
 	fi
 }
 
@@ -19,8 +19,8 @@ function runTestsInFile {
 	shift
 
 	local dirpath=$(dirname "$file")
-	local dirname=$(basename -a "$dirpath")
-	local filename=$(basename -a "$file")
+	local dirname=$(basename "$dirpath")
+	local filename=$(basename "$file")
 	local shortTestPath="${dirname}/${filename}"
 
     local LIGHT_BLUE="[1;34m"
