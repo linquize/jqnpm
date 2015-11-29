@@ -1,0 +1,19 @@
+language: generic
+sudo: false
+os:
+  - linux
+  - osx  
+before_script:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then curl -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-osx-amd64 > jq; else curl -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > jq; fi
+  - chmod 755 jq
+  - git clone https://github.com/kward/shunit2
+  - git config --global user.name User
+  - git config --global user.email user@example.com
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update && brew install bash; fi # Mac default bash is too old
+
+script:
+  - jq --version
+  - git --version
+  - bash --version
+  - PATH=`pwd`:`pwd`/shunit2/source/2.1/src:$PATH ./tests/create-bundles.sh
+  - PATH=`pwd`:`pwd`/shunit2/source/2.1/src:$PATH ./tests/all.sh
